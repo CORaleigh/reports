@@ -1,12 +1,12 @@
 require 'mysql2'
 require 'csv'
+require_relative 'env'
 
 class Importer
 
-  attr_reader :db_name, :import_csv
+  attr_reader :import_csv
 
-  def initialize(db_name, import_csv)
-    @db_name = db_name
+  def initialize(import_csv)
     @import_csv = File.expand_path("../#{import_csv}", __FILE__)
   end
 
@@ -17,7 +17,7 @@ class Importer
   end
 
   def client
-    @client ||= Mysql2::Client.new(host: 'localhost', database: db_name, username: 'root')
+    @client ||= Mysql2::Client.new(host: ENV['DATABASE_HOST'], database: ENV['DATABASE'], username: ENV['DATABASE_USER'], password: ENV['DATABASE_PASSWORD'])
   end
 
   def clear_table_query
