@@ -5,14 +5,16 @@ Export all Socrata data to CSV file, which can be imported into local mySQL DB u
 
 ## SQL
 
-1. [create_table.sql](create_table.sql) SQL to create table
-2. [load_csv_into_mysql.sql](load_csv_into_mysql.sql) loads CSV file into mySQL DB
-3. [sample_queries.sql](sample_queries.sql) example SQL queries to analyze data
+1. [sample_queries.sql](sample_queries.sql) example SQL queries to analyze data
 
 ## Ruby code
 
-1. [summarize_stage_1_crime.rb](summarize_stage_1_crime.rb) generates data for Stage 1 Police Crime reports
-2. [find_duplicate_incidents.rb](find_duplicate_incidents.rb) find duplicate incident numbers in data (which are supposed to be unique)
+1. [import.rb](import.rb) imports data into database from CSV file, take 2 arguments `database_name` `csv_filename`
+```ruby
+  ruby import.rb city_of_raleigh_crime All_Police_Crime_Data.csv
+```
+2. [summarize_stage_1_crime.rb](summarize_stage_1_crime.rb) generates data for Stage 1 Police Crime reports
+3. [find_duplicate_incidents.rb](find_duplicate_incidents.rb) find duplicate incident numbers in data (which are supposed to be unique)
 
 ## Output
 
