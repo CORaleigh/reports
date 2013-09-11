@@ -1,4 +1,5 @@
 require 'mysql2'
+require_relative 'env'
 
 class CrimeIncidentDuplicateLocator
 
@@ -42,7 +43,7 @@ class CrimeIncidentDuplicateLocator
   end
 
   def client
-    @client ||= Mysql2::Client.new(host: 'localhost', database: 'city_of_raleigh_crime', username: 'root', password: 'root')
+    @client ||= Mysql2::Client.new(host: ENV['DATABASE_HOST'], database: ENV['DATABASE'], username: ENV['DATABASE_USER'], password: ENV['DATABASE_PASSWORD'])
   end
 
 end
