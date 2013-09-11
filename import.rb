@@ -11,9 +11,13 @@ class Importer
   end
 
   def run
-    client.query(clear_table_query)
-    client.query(create_table_query)
-    client.query(load_csv_query)
+    results = client.query(clear_table_query)
+    results = client.query(create_table_query)
+    results = client.query(load_csv_query)
+    results = client.query("SELECT COUNT(*) FROM all_years")
+    results.each do |row|
+      puts "Found #{row['COUNT(*)']} rows in table"
+    end
   end
 
   def client
@@ -50,7 +54,6 @@ class Importer
           INC_DATETIME = date_format(str_to_date(@date, '%m/%d/%Y %l:%i:%s %p'), '%Y-%m-%d %H:%i:%s');
     SQL
   end
-
 end
 
-Importer.new(ARGV[0], ARGV[1]).run
+Importer.new(ARGV[0]).run
